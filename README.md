@@ -4,12 +4,12 @@
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Framework-Flask-red.svg)](https://flask.palletsprojects.com/)
 
-**👉 [Play ShadoWord Live Here](https://your-placeholder-link.com) 👈**
+**👉 [Play ShadoWord Live Here](https://shadoword.onrender.com) 👈**
 
 **ShadoWord** is a multilingual, math-based twist on the classic daily word game. Instead of relying on green and yellow letter clues, players deduce the hidden word by analyzing its numerical "wave" and narrowing down the shrinking shadow boundaries.
 
 <div align="center">
-  <img src="assets/gameplay.png" alt="ShadoWord Gameplay" width="400">
+  <img src="gameplay.png" alt="ShadoWord Gameplay" width="400">
 </div>
 
 ## 🧠 The Math Behind the Game
