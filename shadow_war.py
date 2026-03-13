@@ -1,10 +1,12 @@
-from flask import Flask, render_template_string, jsonify, request
+from flask import Flask, render_template_string, jsonify, request, session
 import urllib.request
 import unicodedata
 import random
 import os
 
 app = Flask(__name__)
+
+app.secret_key = os.environ.get("SECRET_KEY", "super-secret-shadow-key-123")
 
 # --- MULTILINGUAL DICTIONARY SETUP ---
 def clean_word(w):
@@ -31,11 +33,11 @@ DICTIONARIES = {
     "ca": load_dictionary("ca", None, ["TEMPS", "DONES", "PARLA", "ARBRE", "LLUNA", "FOSCA", "LLUMS", "AMICS", "MORTS"])
 }
 
-TARGET_WORDS = {
-    "en": random.choice(list(DICTIONARIES["en"])),
-    "es": random.choice(list(DICTIONARIES["es"])),
-    "ca": random.choice(list(DICTIONARIES["ca"]))
-}
+# TARGET_WORDS = {
+#     "en": random.choice(list(DICTIONARIES["en"])),
+#     "es": random.choice(list(DICTIONARIES["es"])),
+#     "ca": random.choice(list(DICTIONARIES["ca"]))
+# }
 
 # --- MATH LOGIC ---
 def word_to_wave(word):
@@ -257,7 +259,7 @@ HTML_TEMPLATE = """
                 <button class="icon-btn" onclick="openModal('helpModal')">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
                 </button>
-                <a href="https://buymeacoffee.com/shadoword" class="bmac-btn">
+                <a href="https://buymeacoffee.com/shadoword" target="_blank" class="bmac-btn">
                     <svg viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
                     <span id="txt-coffee-main">Coffee</span>
                 </a>
@@ -383,7 +385,7 @@ HTML_TEMPLATE = """
             </div>
             
             <div style="margin-top: 15px; text-align: center;">
-                <a href="https://buymeacoffee.com/shadoword" class="bmac-btn">
+                <a href="https://buymeacoffee.com/shadoword" target="_blank" class="bmac-btn">
                     <svg viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
                     <span id="txt-coffee-1">Buy me a Coffee</span>
                 </a>
@@ -402,7 +404,7 @@ HTML_TEMPLATE = """
                 <div class="stat-box"><div class="val" id="statMax">0</div><div class="lbl" id="txt-stat-max">Max</div></div>
             </div>
             <div style="text-align: center; margin-top: 20px;">
-                <a href="https://buymeacoffee.com/shadoword" class="bmac-btn">
+                <a href="https://buymeacoffee.com/shadoword" target="_blank" class="bmac-btn">
                     <svg viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
                     <span id="txt-coffee-2">Support the Dev</span>
                 </a>
@@ -862,6 +864,9 @@ HTML_TEMPLATE = """
                     }
                 }
             });
+            setTimeout(() => {
+                if(chart) chart.update('none');
+            }, 100);
         }
     </script>
 </body>
@@ -884,8 +889,12 @@ def check_guess():
         return jsonify({"error": "Word must be 5 letters."}), 400
     if guess not in DICTIONARIES[lang]:
         return jsonify({"error": "Not in word list!"}), 400
+    
+    session_key = f'target_word_{lang}'
+    if session_key not in session:
+        session[session_key] = random.choice(list(DICTIONARIES[lang]))
         
-    current_target = TARGET_WORDS[lang]
+    current_target = session[session_key]
     guess_wave = word_to_wave(guess)
     target_wave = word_to_wave(current_target)
     
@@ -915,17 +924,15 @@ def reset_game():
     data = request.json or {}
     lang = data.get('lang', 'en')
     
-    TARGET_WORDS[lang] = random.choice(list(DICTIONARIES[lang]))
-    print(f"[{lang.upper()}] Cheat: New target word is: {TARGET_WORDS[lang]}")
+    session_key = f'target_word_{lang}'
+    session[session_key] = random.choice(list(DICTIONARIES[lang]))
+
+    print(f"[{lang.upper()}] Cheat: New target word is: {session[session_key]}")
     
     return jsonify({"status": "reset"})
 
 if __name__ == '__main__':
-    # Print targets for local debugging
-    for l in TARGET_WORDS:
-        print(f"[{l.upper()}] Target at startup: {TARGET_WORDS[l]}")
-    
     # Use environment variables for the port (required by many cloud hosts)
     # Turn debug=False to prevent security vulnerabilities in production
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=True)
