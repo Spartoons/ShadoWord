@@ -4,6 +4,8 @@
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Framework-Flask-red.svg)](https://flask.palletsprojects.com/)
 
+**👉 [Play ShadoWord Live Here](https://your-placeholder-link.com) 👈**
+
 **ShadoWord** is a multilingual, math-based twist on the classic daily word game. Instead of relying on green and yellow letter clues, players deduce the hidden word by analyzing its numerical "wave" and narrowing down the shrinking shadow boundaries.
 
 <div align="center">
@@ -55,6 +57,11 @@ To run ShadoWord on your own machine for development or personal play:
 * `words_en.txt`, `words_es.txt`, `words_ca.txt`: The local 5-letter dictionary files.
 * `requirements.txt`: Python dependencies (Flask, gunicorn).
 * `Procfile`: Production server configuration.
+
+## ☕ Support the Project
+If you enjoy the game and want to support its development and server costs, consider buying me a coffee!
+
+<a href="https://www.buymeacoffee.com/YOUR_USERNAME" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## 🤝 Acknowledgments & Disclaimers
 
