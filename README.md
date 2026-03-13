@@ -71,4 +71,4 @@ If you enjoy the game and want to support its development and server costs, cons
 
 ## 📄 License
 
-This project is licensed under the **Apache License 2.0** - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details. You are free to use, modify, and distribute this software, provided you include the original copyright notice and state any changes made.
+This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details. You are free to use, modify, and distribute this software, provided you include the original copyright notice and state any changes made.
