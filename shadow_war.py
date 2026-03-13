@@ -250,6 +250,8 @@ HTML_TEMPLATE = """
         }
 
     </style>
+
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c4bce8ba-8667-48aa-b318-61203f4ca006"></script>
 </head>
 <body>
 
@@ -935,4 +937,4 @@ if __name__ == '__main__':
     # Use environment variables for the port (required by many cloud hosts)
     # Turn debug=False to prevent security vulnerabilities in production
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=False)
