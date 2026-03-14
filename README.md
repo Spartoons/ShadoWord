@@ -9,7 +9,7 @@
 **ShadoWord** is a multilingual, math-based twist on the classic daily word game. Instead of relying on green and yellow letter clues, players deduce the hidden word by analyzing its numerical "wave" and narrowing down the shrinking shadow boundaries.
 
 <div align="center">
-  <img src="assets/gameplay.png" alt="ShadoWord Gameplay" width="400">
+  <img src="assets/shadoword.gif" alt="ShadoWord Gameplay" width="400">
 </div>
 
 ## 🧠 The Math Behind the Game

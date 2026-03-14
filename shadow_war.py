@@ -382,8 +382,7 @@ HTML_TEMPLATE = """
                 <li id="txt-help-5"><strong>Tip:</strong> Click the mini-charts in your history to hide/show those lines on the main board!</li>
             </ul>
             
-            <div id="txt-help-footer" style="font-size: 12px; margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 15px;">
-                Inspired by the original <strong>WordWavr</strong> concept a (<a href="https://wordwavr.app/" target="_blank">https://wordwavr.app/</a>). If you enjoy this twist, be sure to check that out!
+            <div id="txt-help-footer" style="font-size: 11px; margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 15px; line-height: 1.4;">
             </div>
             
             <div style="margin-top: 15px; text-align: center;">
@@ -426,7 +425,7 @@ HTML_TEMPLATE = """
                 h_3: "The dashed lines show the upper and lower limits. The closer your guess is to the target, the narrower the shadow becomes.",
                 h_4: "Use the shrinking boundaries to deduce the correct letters!",
                 h_5: "<strong>Tip:</strong> Click the mini-charts in your history to hide/show those lines on the main board!",
-                h_foot: 'Inspired by the original <strong>WordWavr</strong> concept (<a href="https://wordwavr.app" target="_blank" style="color: var(--accent); text-decoration: underline;">wordwavr.app</a>). If you enjoy this twist, be sure to check that out!',                s_title: "Statistics", s_play: "Played", s_win: "Win %", s_streak: "Streak", s_max: "Max",
+                h_foot: 'Inspired by the original <strong>WordWavr</strong> concept (<a href="https://wordwavr.app" target="_blank" style="color: var(--accent); text-decoration: underline;">wordwavr.app</a>). If you enjoy this twist, be sure to check that out!<br><div style="margin-top: 15px; font-size: 13px; font-weight: bold;"><a href="/about" style="color: var(--accent);">Read full rules & About</a></div><div style="margin-top: 10px; font-size: 11px; opacity: 0.7;"><a href="/privacy" style="color: inherit; margin-right: 10px;">Privacy Policy</a> | <a href="/terms" style="color: inherit; margin-left: 10px;">Terms of Service</a></div>',
                 coffee: "Buy me a Coffee", msg_need: "Need 5 letters.", msg_copy: "Results copied to clipboard!",
                 msg_win: "🎉 Correct!", msg_over: "Game Over! Word was "
             },
@@ -439,7 +438,7 @@ HTML_TEMPLATE = """
                 h_3: "Las líneas muestran los límites. Cuanto más cerca esté tu intento, más estrecha será la sombra.",
                 h_4: "¡Usa estos límites para deducir las letras correctas!",
                 h_5: "<strong>Consejo:</strong> ¡Haz clic en los mini-gráficos para ocultar/mostrar líneas en el tablero!",
-                h_foot: 'Inspirado en el concepto original de <strong>WordWavr</strong> (<a href="https://wordwavr.app" target="_blank" style="color: var(--accent); text-decoration: underline;">wordwavr.app</a>).',
+                h_foot: 'Inspirado en el concepto original de <strong>WordWavr</strong> (<a href="https://wordwavr.app" target="_blank" style="color: var(--accent); text-decoration: underline;">wordwavr.app</a>).<br><div style="margin-top: 15px; font-size: 13px; font-weight: bold;"><a href="/about" style="color: var(--accent);">Leer reglas completas y Acerca de</a></div><div style="margin-top: 10px; font-size: 11px; opacity: 0.7;"><a href="/privacy" style="color: inherit; margin-right: 10px;">Política de Privacidad</a> | <a href="/terms" style="color: inherit; margin-left: 10px;">Términos de Servicio</a></div>',
                 s_title: "Estadísticas", s_play: "Jugado", s_win: "% Victorias", s_streak: "Racha", s_max: "Máx",
                 coffee: "Invítame un Café", msg_need: "Necesitas 5 letras.", msg_copy: "¡Copiado al portapapeles!",
                 msg_win: "🎉 ¡Correcto!", msg_over: "¡Fin del juego! Era "
@@ -453,7 +452,7 @@ HTML_TEMPLATE = """
                 h_3: "Les línies mostren els límits. Com més a prop estigui el teu intent, més estreta serà l'ombra.",
                 h_4: "Utilitza aquests límits per deduir les lletres correctes!",
                 h_5: "<strong>Consell:</strong> Fes clic als mini-gràfics per ocultar/mostrar línies al tauler!",
-                h_foot: 'Inspirat en el concepte original de <strong>WordWavr</strong> (<a href="https://wordwavr.app" target="_blank" style="color: var(--accent); text-decoration: underline;">wordwavr.app</a>).',
+                h_foot: 'Inspirat en el concepte original de <strong>WordWavr</strong> (<a href="https://wordwavr.app" target="_blank" style="color: var(--accent); text-decoration: underline;">wordwavr.app</a>).<br><div style="margin-top: 15px; font-size: 13px; font-weight: bold;"><a href="/about" style="color: var(--accent);">Llegir regles completes i Sobre</a></div><div style="margin-top: 10px; font-size: 11px; opacity: 0.7;"><a href="/privacy" style="color: inherit; margin-right: 10px;">Política de Privacitat</a> | <a href="/terms" style="color: inherit; margin-left: 10px;">Termes de Servei</a></div>',
                 s_title: "Estadístiques", s_play: "Jugat", s_win: "% Victòries", s_streak: "Ratxa", s_max: "Màx",
                 coffee: "Convida'm a un Cafè", msg_need: "Necessites 5 lletres.", msg_copy: "Copiat al porta-retalls!",
                 msg_win: "🎉 Correcte!", msg_over: "Fi del joc! Era "
@@ -875,6 +874,398 @@ HTML_TEMPLATE = """
 </html>
 """
 
+# --- LEGAL & ABOUT TEMPLATES ---
+
+# --- IMPROVED SHARED CSS & JS FOR ALL PAGES ---
+SHARED_CSS_JS = """
+    <style>
+        :root {
+            --bg-color: #111520; --text-color: #f8fafc; --text-muted: #94a3b8;
+            --box-bg: #1e2536; --border-color: #334155; --accent: #8ab4f8; 
+            --accent-guess: #ff5a00; 
+            --success: #4ade80; 
+            --shadow-fill: rgba(148, 163, 184, 0.15);
+        }
+        body.light-mode {
+            --bg-color: #f8fafc; --text-color: #0f172a; --text-muted: #64748b;
+            --box-bg: #ffffff; --border-color: #cbd5e1; --accent: #2563eb; 
+            --accent-guess: #ea580c;
+            --success: #166534;
+            --shadow-fill: rgba(100, 116, 139, 0.15);
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color); color: var(--text-color);
+            margin: 0; padding: 0; transition: background 0.3s, color 0.3s;
+            line-height: 1.6;
+        }
+        /* Reduced max-width to match the main game container */
+        .container { max-width: 500px; margin: 0 auto; padding: 20px 20px 60px 20px; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+        .header-right { display: flex; gap: 6px; align-items: center; }
+        h1.logo-title { margin: 0; font-size: 18px; letter-spacing: 3px; font-weight: bold; text-align: center; flex-grow: 1; color: var(--text-color); }
+        h2 { color: var(--accent); font-size: 18px; margin-top: 35px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; font-weight: 600; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .icon-btn { 
+            background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); 
+            border-radius: 6px; width: 36px; height: 36px; cursor: pointer;
+            display: flex; justify-content: center; align-items: center; padding: 0;
+        }
+        .icon-btn:hover { background: var(--box-bg); color: var(--text-color); }
+        .icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
+        .lang-select {
+            background: var(--box-bg); color: var(--accent); border: 1px solid var(--border-color);
+            border-radius: 6px; padding: 6px 12px; font-weight: bold; cursor: pointer; outline: none; 
+            appearance: none; text-align: center; font-size: 14px;
+        }
+        .content-box { background: var(--box-bg); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .lang-section { display: none; }
+        
+        /* Game replicas */
+        .svg-box { background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin: 15px 0; text-align: center; }
+        .svg-label { font-size: 13px; color: var(--text-muted); margin-top: 15px; font-style: italic; }
+        
+        .input-row { display: flex; justify-content: center; gap: 8px; margin: 25px 0 10px 0; }
+        .letter-box {
+            width: 40px; height: 50px; font-size: 24px; font-weight: bold;
+            text-align: center; text-transform: uppercase;
+            background: transparent; color: var(--text-color);
+            border: 2px solid var(--border-color); border-radius: 6px;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        .legend { display: flex; justify-content: center; gap: 15px; font-size: 12px; margin-bottom: 10px; color: var(--text-color); font-weight: bold; }
+        .leg-item { display: flex; align-items: center; gap: 5px; }
+        .leg-color { width: 12px; height: 12px; border-radius: 50%; }
+
+        footer.humble-links { margin-top: 50px; text-align: center; font-size: 13px; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 20px; }
+    </style>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }
+        function changeLang() {
+            const lang = document.getElementById('langSelect').value;
+            document.querySelectorAll('.lang-section').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.lang-' + lang).forEach(el => el.style.display = 'block');
+            localStorage.setItem('shadowLang', lang);
+        }
+        window.onload = () => {
+            if(localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+            const savedLang = localStorage.getItem('shadowLang') || 'en';
+            const select = document.getElementById('langSelect');
+            if(select) select.value = savedLang;
+            changeLang();
+        };
+    </script>
+"""
+
+HEADER_HTML = """
+    <header>
+        <a href="/" class="icon-btn" title="Back to Game">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        </a>
+        <h1 class="logo-title">SHADOWORD</h1>
+        <div class="header-right">
+            <select id="langSelect" class="lang-select" onchange="changeLang()">
+                <option value="en">EN</option>
+                <option value="es">ES</option>
+                <option value="ca">CA</option>
+            </select>
+            <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme">
+                <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3z"/></svg>
+            </button>
+        </div>
+    </header>
+"""
+
+PRIVACY_HTML = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Privacy Policy - ShadoWord</title>{SHARED_CSS_JS}</head>
+<body>
+    <div class="container">
+        {HEADER_HTML}
+        <div class="content-box">
+            <div class="lang-section lang-en">
+                <h1>Privacy Policy</h1><p><em>Last Updated: March 2026</em></p>
+                <p>At ShadoWord, we value your privacy. This page explains how we handle information.</p>
+                <h2>1. Google AdSense</h2>
+                <p>We use Google AdSense to serve ads. Google uses cookies to serve ads based on a user's prior visits to our website or other websites.</p>
+                <h2>2. Cookies</h2>
+                <p>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank">Google Ads Settings</a>. We also use a basic consent management banner for EU users to comply with GDPR.</p>
+                <h2>3. Analytics</h2>
+                <p>We use Umami/Google Analytics to understand how many people play our game. This data is anonymous.</p>
+                <footer class="humble-links">
+                    Enjoying ShadoWord? Consider <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">buying me a coffee</a> (humble jiji).
+                </footer>
+            </div>
+            <div class="lang-section lang-es">
+                <h1>Política de Privacidad</h1><p><em>Última actualización: Marzo 2026</em></p>
+                <p>En ShadoWord valoramos tu privacidad. Esta página explica cómo manejamos la información.</p>
+                <h2>1. Google AdSense</h2>
+                <p>Utilizamos Google AdSense para mostrar anuncios. Google utiliza cookies para mostrar anuncios basados en las visitas anteriores de un usuario a nuestro sitio web u otros sitios.</p>
+                <h2>2. Cookies</h2>
+                <p>Puedes inhabilitar la publicidad personalizada visitando la <a href="https://www.google.com/settings/ads" target="_blank">Configuración de anuncios de Google</a>. También utilizamos un banner de consentimiento para usuarios de la UE para cumplir con el RGPD.</p>
+                <h2>3. Analíticas</h2>
+                <p>Usamos Umami para entender cuántas personas juegan nuestro juego. Estos datos son anónimos.</p>
+                <footer class="humble-links">
+                    ¿Te gusta ShadoWord? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">invitarme a un café</a> (humble jiji).
+                </footer>
+            </div>
+            <div class="lang-section lang-ca">
+                <h1>Política de Privacitat</h1><p><em>Última actualització: Març 2026</em></p>
+                <p>A ShadoWord valorem la teva privacitat. Aquesta pàgina explica com gestionem la informació.</p>
+                <h2>1. Google AdSense</h2>
+                <p>Utilitzem Google AdSense per mostrar anuncis. Google utilitza galetes per mostrar anuncis basats en les visites anteriors d'un usuari al nostre lloc web o altres llocs.</p>
+                <h2>2. Galetes (Cookies)</h2>
+                <p>Pots desactivar la publicitat personalitzada visitant la <a href="https://www.google.com/settings/ads" target="_blank">Configuració d'anuncis de Google</a>. També utilitzem un bàner de consentiment per a usuaris de la UE per complir amb el RGPD.</p>
+                <h2>3. Analítiques</h2>
+                <p>Utilitzem Umami per entendre quantes persones juguen al nostre joc. Aquestes dades són anònimes.</p>
+                <footer class="humble-links">
+                    T'agrada ShadoWord? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">convidar-me a un cafè</a> (humble jiji).
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+"""
+
+TERMS_HTML = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Terms of Service - ShadoWord</title>{SHARED_CSS_JS}</head>
+<body>
+    <div class="container">
+        {HEADER_HTML}
+        <div class="content-box">
+            <div class="lang-section lang-en">
+                <h1>Terms of Service</h1>
+                <p>ShadoWord is a free-to-play puzzle game provided "as is", without any warranties.</p>
+                <p>Usage of this site implies acceptance of our cookie policy for functional and advertising purposes.</p>
+                <p>Hope you enjoy playing! Remember, it's just a game designed for fun and mental exercise. Don't overthink it, and have a good time squeezing that shadow!</p>
+                <footer class="humble-links">
+                    Enjoying ShadoWord? Consider <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">buying me a coffee</a> (humble jiji).
+                </footer>
+            </div>
+            <div class="lang-section lang-es">
+                <h1>Términos de Servicio</h1>
+                <p>ShadoWord es un juego de rompecabezas gratuito proporcionado "tal cual", sin ninguna garantía.</p>
+                <p>El uso de este sitio implica la aceptación de nuestra política de cookies para fines funcionales y publicitarios.</p>
+                <p>¡Esperamos que disfrutes jugando! Recuerda, es solo un juego diseñado para la diversión y el ejercicio mental. No lo pienses demasiado, ¡y diviértete exprimiendo esa sombra!</p>
+                <footer class="humble-links">
+                    ¿Te gusta ShadoWord? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">invitarme a un café</a> (humble jiji).
+                </footer>
+            </div>
+            <div class="lang-section lang-ca">
+                <h1>Termes de Servei</h1>
+                <p>ShadoWord és un joc de trencaclosques gratuït proporcionat "tal qual", sense cap garantia.</p>
+                <p>L'ús d'aquest lloc implica l'acceptació de la nostra política de galetes per a finalitats funcionals i publicitàries.</p>
+                <p>Esperem que gaudeixis jugant! Recorda, és només un joc dissenyat per a la diversió i l'exercici mental. No ho pensis massa, i diverteix-te exprimint aquesta ombra!</p>
+                <footer class="humble-links">
+                    T'agrada ShadoWord? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">convidar-me a un cafè</a> (humble jiji).
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+"""
+
+ABOUT_HTML = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>About - ShadoWord</title>{SHARED_CSS_JS}</head>
+<body>
+    <div class="container">
+        {HEADER_HTML}
+        <div class="content-box">
+            
+            <div class="lang-section lang-en">
+                <h1>How to play ShadoWord</h1>
+                <p>Welcome to <strong>ShadoWord</strong>, a puzzle where you don't guess letters—you hunt for the mathematical wave of a hidden word.</p>
+                
+                <h2>Step 1: The Hidden Target</h2>
+                <p>Every word has a numerical wave based on the alphabet (A=1, B=2, C=3... Z=26). At the start of the game, there is a hidden target word. Think of it as a <strong>Green Line</strong> waiting to be found.</p>
+                
+                <div class="svg-box">
+                    <svg width="100%" height="120" viewBox="0 0 300 120" preserveAspectRatio="none">
+                        <path d="M20,40 C45,40 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--success)" stroke-width="4"/>
+                    </svg>
+                    <div class="svg-label">The target is hidden. You have 6 tries to find its exact shape.</div>
+                </div>
+
+                <h2>Step 2: Your First Guess</h2>
+                <p>You type your first word. The game plots it as an <strong>Orange Line</strong>. Then, it calculates the difference between your guess and the hidden target, drawing a <strong>Shadow</strong> (dashed boundaries) around your guess.</p>
+                
+                <div class="input-row">
+                    <div class="letter-box">G</div><div class="letter-box">H</div><div class="letter-box">O</div><div class="letter-box">S</div><div class="letter-box">T</div>
+                </div>
+
+                <div class="svg-box">
+                    <div class="legend">
+                        <div class="leg-item"><div class="leg-color" style="background:var(--success);"></div>Target</div>
+                        <div class="leg-item"><div class="leg-color" style="background:var(--accent-guess);"></div>Guess</div>
+                    </div>
+                    <svg width="100%" height="120" viewBox="0 0 300 120" preserveAspectRatio="none">
+                        <path d="M20,40 C45,40 60,10 85,10 C110,10 125,50 150,50 C175,50 190,0 215,0 C240,0 255,60 280,60 L280,100 C255,100 240,80 215,80 C190,80 175,90 150,90 C125,90 110,90 85,90 C60,90 45,120 20,120 Z" fill="var(--shadow-fill)"/>
+                        <path d="M20,40 C45,40 60,10 85,10 C110,10 125,50 150,50 C175,50 190,0 215,0 C240,0 255,60 280,60" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,120 C45,120 60,90 85,90 C110,90 125,90 150,90 C175,90 190,80 215,80 C240,80 255,100 280,100" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,40 C45,40 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--success)" stroke-width="4"/>
+                        <path d="M20,80 C45,80 60,50 85,50 C110,50 125,70 150,70 C175,70 190,40 215,40 C240,40 255,80 280,80" fill="none" stroke="var(--accent-guess)" stroke-width="3"/>
+                    </svg>
+                    <div class="svg-label">The target is <em>always</em> trapped inside the shadow. The wider the shadow, the further away your guess was.</div>
+                </div>
+
+                <h2>Step 3: Squeezing the Shadow</h2>
+                <p>Use the shrinking boundaries to deduce the letters. When your new guess is mathematically closer, the shadow gets tighter!</p>
+                
+                <div class="input-row">
+                    <div class="letter-box">W</div><div class="letter-box">A</div><div class="letter-box">T</div><div class="letter-box">E</div><div class="letter-box">R</div>
+                </div>
+
+                <div class="svg-box">
+                    <svg width="100%" height="120" viewBox="0 0 300 120" preserveAspectRatio="none">
+                        <path d="M20,40 C45,40 60,70 85,70 C110,70 125,30 150,30 C175,30 190,60 215,60 C240,60 255,40 280,40 L280,60 C255,60 240,80 215,80 C190,80 175,50 150,50 C125,50 110,90 85,90 C60,90 45,60 20,60 Z" fill="var(--shadow-fill)"/>
+                        <path d="M20,40 C45,40 60,70 85,70 C110,70 125,30 150,30 C175,30 190,60 215,60 C240,60 255,40 280,40" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,60 C45,60 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,40 C45,40 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--success)" stroke-width="4"/>
+                        <path d="M20,50 C45,50 60,80 85,80 C110,80 125,40 150,40 C175,40 190,70 215,70 C240,70 255,50 280,50" fill="none" stroke="var(--accent-guess)" stroke-width="3"/>
+                    </svg>
+                    <div class="svg-label">A great guess! The shadow boundaries squeeze tightly around the target, revealing the correct word.</div>
+                </div>
+                
+                <footer class="humble-links">
+                    Enjoying the challenge? Consider <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">buying me a coffee</a> (humble jiji).
+                </footer>
+            </div>
+            
+            <div class="lang-section lang-es">
+                <h1>Cómo jugar ShadoWord</h1>
+                <p>Bienvenido a <strong>ShadoWord</strong>, un rompecabezas donde no adivinas letras, sino que cazas la onda matemática de una palabra oculta.</p>
+                
+                <h2>Paso 1: El Objetivo Oculto</h2>
+                <p>Cada palabra tiene una onda numérica (A=1, B=2... Z=26). Al inicio, hay una palabra oculta. Imagínala como una <strong>Línea Verde</strong> esperando ser descubierta.</p>
+                
+                <div class="svg-box">
+                    <svg width="100%" height="120" viewBox="0 0 300 120" preserveAspectRatio="none">
+                        <path d="M20,40 C45,40 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--success)" stroke-width="4"/>
+                    </svg>
+                    <div class="svg-label">El objetivo está oculto. Tienes 6 intentos para encontrar su forma exacta.</div>
+                </div>
+
+                <h2>Paso 2: Tu Primer Intento</h2>
+                <p>Escribes tu primera palabra. El juego la dibuja como una <strong>Línea Naranja</strong>. Luego, calcula la diferencia con el objetivo y dibuja una <strong>Sombra</strong> (límites discontinuos) alrededor de tu intento.</p>
+                
+                <div class="input-row">
+                    <div class="letter-box">G</div><div class="letter-box">H</div><div class="letter-box">O</div><div class="letter-box">S</div><div class="letter-box">T</div>
+                </div>
+
+                <div class="svg-box">
+                    <div class="legend">
+                        <div class="leg-item"><div class="leg-color" style="background:var(--success);"></div>Objetivo</div>
+                        <div class="leg-item"><div class="leg-color" style="background:var(--accent-guess);"></div>Intento</div>
+                    </div>
+                    <svg width="100%" height="120" viewBox="0 0 300 120" preserveAspectRatio="none">
+                        <path d="M20,40 C45,40 60,10 85,10 C110,10 125,50 150,50 C175,50 190,0 215,0 C240,0 255,60 280,60 L280,100 C255,100 240,80 215,80 C190,80 175,90 150,90 C125,90 110,90 85,90 C60,90 45,120 20,120 Z" fill="var(--shadow-fill)"/>
+                        <path d="M20,40 C45,40 60,10 85,10 C110,10 125,50 150,50 C175,50 190,0 215,0 C240,0 255,60 280,60" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,120 C45,120 60,90 85,90 C110,90 125,90 150,90 C175,90 190,80 215,80 C240,80 255,100 280,100" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,40 C45,40 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--success)" stroke-width="4"/>
+                        <path d="M20,80 C45,80 60,50 85,50 C110,50 125,70 150,70 C175,70 190,40 215,40 C240,40 255,80 280,80" fill="none" stroke="var(--accent-guess)" stroke-width="3"/>
+                    </svg>
+                    <div class="svg-label">El objetivo <em>siempre</em> está atrapado dentro de la sombra. Cuanto más ancha es, más lejos estabas.</div>
+                </div>
+
+                <h2>Paso 3: Reduciendo la Sombra</h2>
+                <p>Usa los límites para deducir las letras. Cuando tu nuevo intento es matemáticamente más cercano, ¡la sombra se estrecha!</p>
+                
+                <div class="input-row">
+                    <div class="letter-box">W</div><div class="letter-box">A</div><div class="letter-box">T</div><div class="letter-box">E</div><div class="letter-box">R</div>
+                </div>
+
+                <div class="svg-box">
+                    <svg width="100%" height="120" viewBox="0 0 300 120" preserveAspectRatio="none">
+                        <path d="M20,40 C45,40 60,70 85,70 C110,70 125,30 150,30 C175,30 190,60 215,60 C240,60 255,40 280,40 L280,60 C255,60 240,80 215,80 C190,80 175,50 150,50 C125,50 110,90 85,90 C60,90 45,60 20,60 Z" fill="var(--shadow-fill)"/>
+                        <path d="M20,40 C45,40 60,70 85,70 C110,70 125,30 150,30 C175,30 190,60 215,60 C240,60 255,40 280,40" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,60 C45,60 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,40 C45,40 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--success)" stroke-width="4"/>
+                        <path d="M20,50 C45,50 60,80 85,80 C110,80 125,40 150,40 C175,40 190,70 215,70 C240,70 255,50 280,50" fill="none" stroke="var(--accent-guess)" stroke-width="3"/>
+                    </svg>
+                    <div class="svg-label">¡Un gran intento! Los límites se estrechan alrededor del objetivo, revelando la palabra.</div>
+                </div>
+                
+                <footer class="humble-links">
+                    ¿Te gusta el desafío? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">invitarme a un café</a> (humble jiji).
+                </footer>
+            </div>
+
+            <div class="lang-section lang-ca">
+                <h1>Com jugar ShadoWord</h1>
+                <p>Benvingut a <strong>ShadoWord</strong>, un trencaclosques on no endevines lletres, sinó que caces l'ona matemàtica d'una paraula oculta.</p>
+                
+                <h2>Pas 1: L'Objectiu Ocult</h2>
+                <p>Cada paraula té una ona numèrica (A=1, B=2... Z=26). A l'inici, hi ha una paraula oculta. Imagina-la com una <strong>Línia Verda</strong> esperant ser descoberta.</p>
+                
+                <div class="svg-box">
+                    <svg width="100%" height="120" viewBox="0 0 300 120" preserveAspectRatio="none">
+                        <path d="M20,40 C45,40 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--success)" stroke-width="4"/>
+                    </svg>
+                    <div class="svg-label">L'objectiu està ocult. Tens 6 intents per trobar la seva forma exacta.</div>
+                </div>
+
+                <h2>Pas 2: El Teu Primer Intent</h2>
+                <p>Escrius la teva primera paraula. El joc la dibuixa com una <strong>Línia Taronja</strong>. Després, calcula la diferència amb l'objectiu i dibuixa una <strong>Ombra</strong> (límits discontinus) al voltant del teu intent.</p>
+                
+                <div class="input-row">
+                    <div class="letter-box">G</div><div class="letter-box">H</div><div class="letter-box">O</div><div class="letter-box">S</div><div class="letter-box">T</div>
+                </div>
+
+                <div class="svg-box">
+                    <div class="legend">
+                        <div class="leg-item"><div class="leg-color" style="background:var(--success);"></div>Objectiu</div>
+                        <div class="leg-item"><div class="leg-color" style="background:var(--accent-guess);"></div>Intent</div>
+                    </div>
+                    <svg width="100%" height="120" viewBox="0 0 300 120" preserveAspectRatio="none">
+                        <path d="M20,40 C45,40 60,10 85,10 C110,10 125,50 150,50 C175,50 190,0 215,0 C240,0 255,60 280,60 L280,100 C255,100 240,80 215,80 C190,80 175,90 150,90 C125,90 110,90 85,90 C60,90 45,120 20,120 Z" fill="var(--shadow-fill)"/>
+                        <path d="M20,40 C45,40 60,10 85,10 C110,10 125,50 150,50 C175,50 190,0 215,0 C240,0 255,60 280,60" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,120 C45,120 60,90 85,90 C110,90 125,90 150,90 C175,90 190,80 215,80 C240,80 255,100 280,100" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,40 C45,40 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--success)" stroke-width="4"/>
+                        <path d="M20,80 C45,80 60,50 85,50 C110,50 125,70 150,70 C175,70 190,40 215,40 C240,40 255,80 280,80" fill="none" stroke="var(--accent-guess)" stroke-width="3"/>
+                    </svg>
+                    <div class="svg-label">L'objectiu <em>sempre</em> està atrapat dins l'ombra. Com més ampla és, més lluny estaves.</div>
+                </div>
+
+                <h2>Pas 3: Reduint l'Ombra</h2>
+                <p>Usa els límits per deduir les lletres. Quan el teu nou intent és matemàticament més proper, l'ombra s'estreny!</p>
+                
+                <div class="input-row">
+                    <div class="letter-box">W</div><div class="letter-box">A</div><div class="letter-box">T</div><div class="letter-box">E</div><div class="letter-box">R</div>
+                </div>
+
+                <div class="svg-box">
+                    <svg width="100%" height="120" viewBox="0 0 300 120" preserveAspectRatio="none">
+                        <path d="M20,40 C45,40 60,70 85,70 C110,70 125,30 150,30 C175,30 190,60 215,60 C240,60 255,40 280,40 L280,60 C255,60 240,80 215,80 C190,80 175,50 150,50 C125,50 110,90 85,90 C60,90 45,60 20,60 Z" fill="var(--shadow-fill)"/>
+                        <path d="M20,40 C45,40 60,70 85,70 C110,70 125,30 150,30 C175,30 190,60 215,60 C240,60 255,40 280,40" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,60 C45,60 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5,5"/>
+                        <path d="M20,40 C45,40 60,90 85,90 C110,90 125,50 150,50 C175,50 190,80 215,80 C240,80 255,60 280,60" fill="none" stroke="var(--success)" stroke-width="4"/>
+                        <path d="M20,50 C45,50 60,80 85,80 C110,80 125,40 150,40 C175,40 190,70 215,70 C240,70 255,50 280,50" fill="none" stroke="var(--accent-guess)" stroke-width="3"/>
+                    </svg>
+                    <div class="svg-label">Un gran intent! Els límits s'estrenyen al voltant de l'objectiu, revelant la paraula.</div>
+                </div>
+                
+                <footer class="humble-links">
+                    T'agrada el desafiament? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">convidar-me a un cafè</a> (humble jiji).
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+"""
+
 # --- ROUTES ---
 
 @app.route('/')
@@ -932,6 +1323,18 @@ def reset_game():
     print(f"[{lang.upper()}] Cheat: New target word is: {session[session_key]}")
     
     return jsonify({"status": "reset"})
+
+@app.route('/privacy')
+def privacy():
+    return render_template_string(PRIVACY_HTML)
+
+@app.route('/terms')
+def terms():
+    return render_template_string(TERMS_HTML)
+
+@app.route('/about')
+def about():
+    return render_template_string(ABOUT_HTML)
 
 if __name__ == '__main__':
     # Use environment variables for the port (required by many cloud hosts)
