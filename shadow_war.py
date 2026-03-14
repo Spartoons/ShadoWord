@@ -58,7 +58,7 @@ HTML_TEMPLATE = """
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>ShadoWord</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ƒ</text></svg>">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
     <style>
         /* --- THEME VARIABLES --- */
         :root {
@@ -98,6 +98,31 @@ HTML_TEMPLATE = """
             width: 100%; max-width: 500px; 
             display: flex; flex-direction: column;
             position: relative;
+        }
+
+        /* --- NEW LAYOUT FOR SIDE ADS --- */
+        .layout-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+        }
+        
+        .ad-sidebar {
+            display: none; /* Hidden completely on mobile! */
+            width: 160px; /* Standard width for vertical skyscraper ads */
+            position: sticky;
+            top: 20px; /* Sticks to the top as they scroll */
+        }
+
+        /* Show the ads only if the screen is wide enough (e.g., desktop/laptops) */
+        @media (min-width: 1000px) {
+            .layout-wrapper {
+                justify-content: space-between; /* Switch to pushing to the edges ONLY on desktop */
+            }
+            .ad-sidebar { 
+                display: block; 
+            }
         }
         
         /* HEADER */
@@ -252,110 +277,140 @@ HTML_TEMPLATE = """
     </style>
 
     <script defer src="https://cloud.umami.is/script.js" data-website-id="c4bce8ba-8667-48aa-b318-61203f4ca006"></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2459227402455868"
+     crossorigin="anonymous"></script>    
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <div class="header-left">
-                <button class="icon-btn" onclick="openModal('helpModal')">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
-                </button>
-                <a href="https://buymeacoffee.com/shadoword" target="_blank" class="bmac-btn">
-                    <svg viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
-                    <span id="txt-coffee-main">Coffee</span>
-                </a>
-            </div>
-            
-            <h1>SHADOWORD</h1>
-            
-            <div class="header-right">
-                <select id="langSelect" class="lang-select" onchange="changeLanguage()">
-                    <option value="en">EN</option>
-                    <option value="es">ES</option>
-                    <option value="ca">CA</option>
-                </select>
-                <button class="icon-btn" onclick="toggleGuidelines()" title="Toggle Guide Lines">
-                    <svg viewBox="0 0 24 24"><path d="M4 19h16v2H4v-2zm0-4h16v2H4v-2zm0-4h16v2H4V7zm0-4h16v2H4V3z"/></svg>
-                </button>
-                <button class="icon-btn" onclick="toggleTheme()">
-                    <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3z"/></svg>
-                </button>
-                <button class="icon-btn" onclick="openModal('statsModal'); renderStats();">
-                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
-                </button>
-            </div>
-        </header>
+    <div class="layout-wrapper">
         
-        <div class="chart-scroll-box" id="chartScrollBox">
-            <div class="chart-container">
-                <canvas id="waveChart"></canvas>
-            </div>
+        <div class="ad-sidebar">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-2459227402455868"
+                data-ad-slot="2867346921"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
 
-        <div class="dots" id="dotContainer">
-            <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
-            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-        </div>
-        
-        <div class="input-row" id="inputRow">
-            <input type="text" class="letter-box" maxlength="1" readonly>
-            <input type="text" class="letter-box" maxlength="1" readonly>
-            <input type="text" class="letter-box" maxlength="1" readonly>
-            <input type="text" class="letter-box" maxlength="1" readonly>
-            <input type="text" class="letter-box" maxlength="1" readonly>
-        </div>
+            <div class="container">
+                <header>
+                    <div class="header-left">
+                        <button class="icon-btn" onclick="openModal('helpModal')">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+                        </button>
+                        <a href="https://buymeacoffee.com/shadoword" target="_blank" class="bmac-btn">
+                            <svg viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
+                            <span id="txt-coffee-main">Coffee</span>
+                        </a>
+                    </div>
+                    
+                    <h1>SHADOWORD</h1>
+                    
+                    <div class="header-right">
+                        <select id="langSelect" class="lang-select" onchange="changeLanguage()">
+                            <option value="en">EN</option>
+                            <option value="es">ES</option>
+                            <option value="ca">CA</option>
+                        </select>
+                        <button class="icon-btn" onclick="toggleGuidelines()" title="Toggle Guide Lines">
+                            <svg viewBox="0 0 24 24"><path d="M4 19h16v2H4v-2zm0-4h16v2H4v-2zm0-4h16v2H4V7zm0-4h16v2H4V3z"/></svg>
+                        </button>
+                        <button class="icon-btn" onclick="toggleTheme()">
+                            <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3z"/></svg>
+                        </button>
+                        <button class="icon-btn" onclick="openModal('statsModal'); renderStats();">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        </button>
+                    </div>
+                </header>
+                
+                <div class="chart-scroll-box" id="chartScrollBox">
+                    <div class="chart-container">
+                        <canvas id="waveChart"></canvas>
+                    </div>
+                </div>
 
-        <div id="message"></div>
-        
-        <div class="btn-row">
-            <button id="actionBtn" class="action-btn" onclick="resetGame()">
-                <span id="txt-play-again">PLAY AGAIN</span>
-            </button>
-            <button id="shareBtn" class="action-btn secondary" onclick="shareResults()">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-                <span id="txt-share">SHARE</span>
-            </button>
-        </div>
+                <div class="dots" id="dotContainer">
+                    <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+                    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                </div>
+                
+                <div class="input-row" id="inputRow">
+                    <input type="text" class="letter-box" maxlength="1" readonly>
+                    <input type="text" class="letter-box" maxlength="1" readonly>
+                    <input type="text" class="letter-box" maxlength="1" readonly>
+                    <input type="text" class="letter-box" maxlength="1" readonly>
+                    <input type="text" class="letter-box" maxlength="1" readonly>
+                </div>
 
-        <div id="history"></div>
+                <div id="message"></div>
+                
+                <div class="btn-row">
+                    <button id="actionBtn" class="action-btn" onclick="resetGame()">
+                        <span id="txt-play-again">PLAY AGAIN</span>
+                    </button>
+                    <button id="shareBtn" class="action-btn secondary" onclick="shareResults()">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                        <span id="txt-share">SHARE</span>
+                    </button>
+                </div>
 
-        <div class="keyboard" id="keyboardContainer">
-            <div class="key-row">
-                <button class="key" onclick="handleKey('A')">A</button>
-                <button class="key" onclick="handleKey('B')">B</button>
-                <button class="key" onclick="handleKey('C')">C</button>
-                <button class="key" onclick="handleKey('D')">D</button>
-                <button class="key" onclick="handleKey('E')">E</button>
-                <button class="key" onclick="handleKey('F')">F</button>
-                <button class="key" onclick="handleKey('G')">G</button>
-                <button class="key" onclick="handleKey('H')">H</button>
-                <button class="key" onclick="handleKey('I')">I</button>
+                <div id="history"></div>
+
+                <div class="keyboard" id="keyboardContainer">
+                    <div class="key-row">
+                        <button class="key" onclick="handleKey('A')">A</button>
+                        <button class="key" onclick="handleKey('B')">B</button>
+                        <button class="key" onclick="handleKey('C')">C</button>
+                        <button class="key" onclick="handleKey('D')">D</button>
+                        <button class="key" onclick="handleKey('E')">E</button>
+                        <button class="key" onclick="handleKey('F')">F</button>
+                        <button class="key" onclick="handleKey('G')">G</button>
+                        <button class="key" onclick="handleKey('H')">H</button>
+                        <button class="key" onclick="handleKey('I')">I</button>
+                    </div>
+                    <div class="key-row">
+                        <button class="key" onclick="handleKey('J')">J</button>
+                        <button class="key" onclick="handleKey('K')">K</button>
+                        <button class="key" onclick="handleKey('L')">L</button>
+                        <button class="key" onclick="handleKey('M')">M</button>
+                        <button class="key" onclick="handleKey('N')">N</button>
+                        <button class="key" onclick="handleKey('O')">O</button>
+                        <button class="key" onclick="handleKey('P')">P</button>
+                        <button class="key" onclick="handleKey('Q')">Q</button>
+                        <button class="key" onclick="handleKey('R')">R</button>
+                    </div>
+                    <div class="key-row">
+                        <button class="key wide" onclick="handleKey('ENTER')">ENTER</button>
+                        <button class="key" onclick="handleKey('S')">S</button>
+                        <button class="key" onclick="handleKey('T')">T</button>
+                        <button class="key" onclick="handleKey('U')">U</button>
+                        <button class="key" onclick="handleKey('V')">V</button>
+                        <button class="key" onclick="handleKey('W')">W</button>
+                        <button class="key" onclick="handleKey('X')">X</button>
+                        <button class="key" onclick="handleKey('Y')">Y</button>
+                        <button class="key" onclick="handleKey('Z')">Z</button>
+                        <button class="key wide" onclick="handleKey('DEL')">DEL</button>
+                    </div>
+                </div>
             </div>
-            <div class="key-row">
-                <button class="key" onclick="handleKey('J')">J</button>
-                <button class="key" onclick="handleKey('K')">K</button>
-                <button class="key" onclick="handleKey('L')">L</button>
-                <button class="key" onclick="handleKey('M')">M</button>
-                <button class="key" onclick="handleKey('N')">N</button>
-                <button class="key" onclick="handleKey('O')">O</button>
-                <button class="key" onclick="handleKey('P')">P</button>
-                <button class="key" onclick="handleKey('Q')">Q</button>
-                <button class="key" onclick="handleKey('R')">R</button>
+
+            <div class="ad-sidebar">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-2459227402455868"
+                    data-ad-slot="2867346921"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
-            <div class="key-row">
-                <button class="key wide" onclick="handleKey('ENTER')">ENTER</button>
-                <button class="key" onclick="handleKey('S')">S</button>
-                <button class="key" onclick="handleKey('T')">T</button>
-                <button class="key" onclick="handleKey('U')">U</button>
-                <button class="key" onclick="handleKey('V')">V</button>
-                <button class="key" onclick="handleKey('W')">W</button>
-                <button class="key" onclick="handleKey('X')">X</button>
-                <button class="key" onclick="handleKey('Y')">Y</button>
-                <button class="key" onclick="handleKey('Z')">Z</button>
-                <button class="key wide" onclick="handleKey('DEL')">DEL</button>
-            </div>
-        </div>
     </div>
 
     <div id="helpModal" class="modal" onclick="closeModalOnBg(event, 'helpModal')">
@@ -553,8 +608,15 @@ HTML_TEMPLATE = """
 
         function changeLanguage() {
             currentLang = document.getElementById('langSelect').value;
+            localStorage.setItem('shadowLang', currentLang);
             applyTranslations();
             resetGame(); 
+        }
+
+        const savedLang = localStorage.getItem('shadowLang');
+        if (savedLang) {
+            currentLang = savedLang;
+            document.getElementById('langSelect').value = currentLang;
         }
 
         function centerChart() {
@@ -875,9 +937,9 @@ HTML_TEMPLATE = """
 """
 
 # --- LEGAL & ABOUT TEMPLATES ---
-
-# --- IMPROVED SHARED CSS & JS FOR ALL PAGES ---
 SHARED_CSS_JS = """
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ƒ</text></svg>">
+    
     <style>
         :root {
             --bg-color: #111520; --text-color: #f8fafc; --text-muted: #94a3b8;
@@ -999,7 +1061,7 @@ PRIVACY_HTML = f"""
                 <h2>3. Analytics</h2>
                 <p>We use Umami/Google Analytics to understand how many people play our game. This data is anonymous.</p>
                 <footer class="humble-links">
-                    Enjoying ShadoWord? Consider <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">buying me a coffee</a> (humble jiji).
+                    Enjoying ShadoWord? Consider <a href="https://buymeacoffee.com/shadoword" target="_blank">buying me a coffee</a> (humble jiji).
                 </footer>
             </div>
             <div class="lang-section lang-es">
@@ -1012,7 +1074,7 @@ PRIVACY_HTML = f"""
                 <h2>3. Analíticas</h2>
                 <p>Usamos Umami para entender cuántas personas juegan nuestro juego. Estos datos son anónimos.</p>
                 <footer class="humble-links">
-                    ¿Te gusta ShadoWord? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">invitarme a un café</a> (humble jiji).
+                    ¿Te gusta ShadoWord? Considera <a href="https://buymeacoffee.com/shadoword" target="_blank">invitarme a un café</a> (humble jiji).
                 </footer>
             </div>
             <div class="lang-section lang-ca">
@@ -1025,7 +1087,7 @@ PRIVACY_HTML = f"""
                 <h2>3. Analítiques</h2>
                 <p>Utilitzem Umami per entendre quantes persones juguen al nostre joc. Aquestes dades són anònimes.</p>
                 <footer class="humble-links">
-                    T'agrada ShadoWord? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">convidar-me a un cafè</a> (humble jiji).
+                    T'agrada ShadoWord? Considera <a href="https://buymeacoffee.com/shadoword" target="_blank">convidar-me a un cafè</a> (humble jiji).
                 </footer>
             </div>
         </div>
@@ -1048,7 +1110,7 @@ TERMS_HTML = f"""
                 <p>Usage of this site implies acceptance of our cookie policy for functional and advertising purposes.</p>
                 <p>Hope you enjoy playing! Remember, it's just a game designed for fun and mental exercise. Don't overthink it, and have a good time squeezing that shadow!</p>
                 <footer class="humble-links">
-                    Enjoying ShadoWord? Consider <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">buying me a coffee</a> (humble jiji).
+                    Enjoying ShadoWord? Consider <a href="https://buymeacoffee.com/shadoword" target="_blank">buying me a coffee</a> (humble jiji).
                 </footer>
             </div>
             <div class="lang-section lang-es">
@@ -1057,7 +1119,7 @@ TERMS_HTML = f"""
                 <p>El uso de este sitio implica la aceptación de nuestra política de cookies para fines funcionales y publicitarios.</p>
                 <p>¡Esperamos que disfrutes jugando! Recuerda, es solo un juego diseñado para la diversión y el ejercicio mental. No lo pienses demasiado, ¡y diviértete exprimiendo esa sombra!</p>
                 <footer class="humble-links">
-                    ¿Te gusta ShadoWord? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">invitarme a un café</a> (humble jiji).
+                    ¿Te gusta ShadoWord? Considera <a href="https://buymeacoffee.com/shadoword" target="_blank">invitarme a un café</a> (humble jiji).
                 </footer>
             </div>
             <div class="lang-section lang-ca">
@@ -1066,7 +1128,7 @@ TERMS_HTML = f"""
                 <p>L'ús d'aquest lloc implica l'acceptació de la nostra política de galetes per a finalitats funcionals i publicitàries.</p>
                 <p>Esperem que gaudeixis jugant! Recorda, és només un joc dissenyat per a la diversió i l'exercici mental. No ho pensis massa, i diverteix-te exprimint aquesta ombra!</p>
                 <footer class="humble-links">
-                    T'agrada ShadoWord? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">convidar-me a un cafè</a> (humble jiji).
+                    T'agrada ShadoWord? Considera <a href="https://buymeacoffee.com/shadoword" target="_blank">convidar-me a un cafè</a> (humble jiji).
                 </footer>
             </div>
         </div>
@@ -1086,7 +1148,7 @@ ABOUT_HTML = f"""
             
             <div class="lang-section lang-en">
                 <h1>How to play ShadoWord</h1>
-                <p>Welcome to <strong>ShadoWord</strong>, a puzzle where you don't guess letters—you hunt for the mathematical wave of a hidden word.</p>
+                <p>Welcome to <strong>ShadoWord</strong>, a puzzle where you don't guess letters, you hunt for the mathematical wave of a hidden word.</p>
                 
                 <h2>Step 1: The Hidden Target</h2>
                 <p>Every word has a numerical wave based on the alphabet (A=1, B=2, C=3... Z=26). At the start of the game, there is a hidden target word. Think of it as a <strong>Green Line</strong> waiting to be found.</p>
@@ -1139,7 +1201,7 @@ ABOUT_HTML = f"""
                 </div>
                 
                 <footer class="humble-links">
-                    Enjoying the challenge? Consider <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">buying me a coffee</a> (humble jiji).
+                    Enjoying the challenge? Consider <a href="https://buymeacoffee.com/shadoword" target="_blank">buying me a coffee</a> (humble jiji).
                 </footer>
             </div>
             
@@ -1198,7 +1260,7 @@ ABOUT_HTML = f"""
                 </div>
                 
                 <footer class="humble-links">
-                    ¿Te gusta el desafío? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">invitarme a un café</a> (humble jiji).
+                    ¿Te gusta el desafío? Considera <a href="https://buymeacoffee.com/shadoword" target="_blank">invitarme a un café</a> (humble jiji).
                 </footer>
             </div>
 
@@ -1257,7 +1319,7 @@ ABOUT_HTML = f"""
                 </div>
                 
                 <footer class="humble-links">
-                    T'agrada el desafiament? Considera <a href="YOUR_SUPPORT_LINK_HERE" target="_blank">convidar-me a un cafè</a> (humble jiji).
+                    T'agrada el desafiament? Considera <a href="https://buymeacoffee.com/shadoword" target="_blank">convidar-me a un cafè</a> (humble jiji).
                 </footer>
             </div>
         </div>
