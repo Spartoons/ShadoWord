@@ -102,27 +102,41 @@ HTML_TEMPLATE = """
 
         /* --- NEW LAYOUT FOR SIDE ADS --- */
         .layout-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: start;
             width: 100%;
         }
-        
-        .ad-sidebar {
+
+        .side-panel {
             display: none; /* Hidden completely on mobile! */
-            width: 160px; /* Standard width for vertical skyscraper ads */
+            width: 160px; 
             position: sticky;
-            top: 20px; /* Sticks to the top as they scroll */
+            top: 20px; 
         }
 
-        /* Show the ads only if the screen is wide enough (e.g., desktop/laptops) */
+        .side-panel.left {
+            grid-column: 1; /* Left lane */
+            justify-self: start; /* Glued to the far left */
+        }
+
+        .side-panel.right {
+            grid-column: 3; /* Right lane */
+            justify-self: end; /* Glued to the far right */
+        }
+        
+        .container { 
+            grid-column: 2; /* Middle lane */
+            width: 100%; 
+            max-width: 500px; 
+            display: flex; 
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Show the ads only if the screen is wide enough */
         @media (min-width: 1000px) {
-            .layout-wrapper {
-                justify-content: space-between; /* Switch to pushing to the edges ONLY on desktop */
-            }
-            .ad-sidebar { 
-                display: block; 
-            }
+            .side-panel { display: block; }
         }
         
         /* HEADER */
@@ -285,7 +299,7 @@ HTML_TEMPLATE = """
 
     <div class="layout-wrapper">
         
-        <div class="ad-sidebar">
+        <div class="side-panel left">
             <ins class="adsbygoogle"
                 style="display:block"
                 data-ad-client="ca-pub-2459227402455868"
@@ -400,7 +414,7 @@ HTML_TEMPLATE = """
                 </div>
             </div>
 
-            <div class="ad-sidebar">
+            <div class="side-panel right">
                 <ins class="adsbygoogle"
                     style="display:block"
                     data-ad-client="ca-pub-2459227402455868"
